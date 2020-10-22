@@ -211,7 +211,34 @@ public class DateUtils {
 		for (int i = 1; i < month; i++) {
 			summ += daysInMonth(i);
 		}
-
 		return summ;
+	}
+	
+	public static boolean isLeapYear(MyDate date) {
+		return DateUtils.isLeapYear(date.getYear());
+	}
+
+	public static boolean isValidDate(MyDate date) {
+		return DateUtils.isValidDate(date.getYear(), date.getMonth(), date.getDay());
+	}
+
+	public static int getDayOfWeek(MyDate date) {
+		return DateUtils.getDayOfWeek(date.getYear(), date.getMonth(), date.getDay());
+	}
+
+	public static String toString(MyDate date) {
+		return DateUtils.toString(date.getYear(), date.getMonth(), date.getDay());
+	}
+
+	public static int countDays(MyDate date) {
+		return DateUtils.countDays(date.getYear(), date.getMonth(), date.getDay());
+	}
+
+	public static int daysInMonth(MyDate date) {
+		return DateUtils.daysInMonth(date.getMonth());
+	}
+
+	public static int daysFromBeginOfYear(MyDate date) {
+		return DateUtils.daysFromBeginOfYear(date.getMonth());
 	}
 }

@@ -43,32 +43,4 @@ public class MyDate {
 		return year;
 	}
 
-	public boolean isLeapYear(MyDate date) {
-		return DateUtils.isLeapYear(date.getYear());
-	}
-
-	public boolean isValidDate(MyDate date) {
-		return DateUtils.isValidDate(date.getYear(), date.getMonth(), date.getDay());
-	}
-
-	public int getDayOfWeek(MyDate date) {
-		return DateUtils.getDayOfWeek(date.getYear(), date.getMonth(), date.getDay());
-	}
-
-	public String toString(MyDate date) {
-		return DateUtils.toString(date.getYear(), date.getMonth(), date.getDay());
-	}
-
-	public int countDays(MyDate date) {
-		return DateUtils.countDays(date.getYear(), date.getMonth(), date.getDay());
-	}
-
-	public int daysInMonth(MyDate date) {
-		return DateUtils.daysInMonth(date.getMonth());
-	}
-
-	public int daysFromBeginOfYear(MyDate date) {
-		return DateUtils.daysFromBeginOfYear(date.getMonth());
-	}
-
 }
