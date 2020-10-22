@@ -4,6 +4,9 @@ import java.util.InputMismatchException;
 
 public class DateUtils {
 
+	private static final int[] MONTH_CODES = new int[] { 0, 1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6 };
+	private static final int[] DAY_OF_WEEK = new int[] { 5, 6, 0, 1, 2, 3, 4 };
+
 	public static boolean isLeapYear(int year) {
 		if (year % 4 == 0) {
 			if (year % 100 == 0) {
@@ -36,50 +39,6 @@ public class DateUtils {
 		return false;
 	}
 
-	public static int getMonthCode(int month) {
-		int monthCode = 0;
-		switch (month) {
-		case 1:
-			monthCode = 1;
-			break;
-		case 2:
-			monthCode = 4;
-			break;
-		case 3:
-			monthCode = 4;
-			break;
-		case 4:
-			monthCode = 0;
-			break;
-		case 5:
-			monthCode = 2;
-			break;
-		case 6:
-			monthCode = 5;
-			break;
-		case 7:
-			monthCode = 0;
-			break;
-		case 8:
-			monthCode = 3;
-			break;
-		case 9:
-			monthCode = 6;
-			break;
-		case 10:
-			monthCode = 1;
-			break;
-		case 11:
-			monthCode = 4;
-			break;
-		case 12:
-			monthCode = 6;
-			break;
-
-		}
-		return monthCode;
-	}
-	
 	public static int getDayOfWeek(int year, int month, int day) {
 		if (!isValidDate(year, month, day)) {
 			throw new InputMismatchException();
@@ -90,7 +49,7 @@ public class DateUtils {
 		} while (displacement % 4 != 0);
 		displacement = (displacement - 1 - year / 100) * 2;
 		int yearCode = (year % 100 + (year % 100) / 4 + displacement) % 7;
-		int monthCode = getMonthCode(month);
+		int monthCode = MONTH_CODES[month];
 		int dayOfWeek = (day + monthCode + yearCode) % 7;
 		if (isLeapYear(year) && day <= 29 && month <= 2) {
 			dayOfWeek--;
@@ -98,25 +57,9 @@ public class DateUtils {
 				dayOfWeek = 6;
 			}
 		}
-		switch (dayOfWeek) {
-		case 0:
-			return 5;
-		case 1:
-			return 6;
-		case 2:
-			return 0;
-		case 3:
-			return 1;
-		case 4:
-			return 2;
-		case 5:
-			return 3;
-		case 6:
-			return 4;
-		}
-		return 0;
+		return DAY_OF_WEEK[dayOfWeek];
 	}
-	
+
 	public static String dayOfWeekToString(int dayOfWeek) {
 		String str = "";
 		switch (dayOfWeek) {
@@ -144,7 +87,7 @@ public class DateUtils {
 		}
 		return str;
 	}
-	
+
 	public static String monthToString(int month) {
 		String strMonth = "";
 		switch (month) {
@@ -228,7 +171,7 @@ public class DateUtils {
 		}
 		return summ;
 	}
-	
+
 	public static boolean isLeapYear(MyDate date) {
 		return isLeapYear(date.getYear());
 	}
