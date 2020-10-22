@@ -6,6 +6,10 @@ public class DateUtils {
 
 	private static final int[] MONTH_CODES = new int[] { 0, 1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6 };
 	private static final int[] DAY_OF_WEEK = new int[] { 5, 6, 0, 1, 2, 3, 4 };
+	private static final String[] DAY_NAME = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+			"Saturday", "Sunday" };
+	private static final String[] MONTH_NAME = new String[] { "", "January", "February", "March", "April",
+			"May", "June", "July", "August", "September", "October", "November", "December"};
 
 	public static boolean isLeapYear(int year) {
 		if (year % 4 == 0) {
@@ -60,81 +64,10 @@ public class DateUtils {
 		return DAY_OF_WEEK[dayOfWeek];
 	}
 
-	public static String dayOfWeekToString(int dayOfWeek) {
-		String str = "";
-		switch (dayOfWeek) {
-		case 0:
-			str = "Monday";
-			break;
-		case 1:
-			str = "Tuesday";
-			break;
-		case 2:
-			str = "Wednesday";
-			break;
-		case 3:
-			str = "Thursday";
-			break;
-		case 4:
-			str = "Friday";
-			break;
-		case 5:
-			str = "Saturday";
-			break;
-		case 6:
-			str = "Sunday";
-			break;
-		}
-		return str;
-	}
-
-	public static String monthToString(int month) {
-		String strMonth = "";
-		switch (month) {
-		case 1:
-			strMonth = "January";
-			break;
-		case 2:
-			strMonth = "February";
-			break;
-		case 3:
-			strMonth = "March";
-			break;
-		case 4:
-			strMonth = "April";
-			break;
-		case 5:
-			strMonth = "May";
-			break;
-		case 6:
-			strMonth = "June";
-			break;
-		case 7:
-			strMonth = "July";
-			break;
-		case 8:
-			strMonth = "August";
-			break;
-		case 9:
-			strMonth = "September";
-			break;
-		case 10:
-			strMonth = "October";
-			break;
-		case 11:
-			strMonth = "November";
-			break;
-		case 12:
-			strMonth = "December";
-			break;
-		}
-		return strMonth;
-	}
-
 	public static String toString(int year, int month, int day) {
 		int dayOfWeek = getDayOfWeek(year, month, day);
-		String str = dayOfWeekToString(dayOfWeek);
-		String strMonth = monthToString(month);
+		String str = DAY_NAME[dayOfWeek];
+		String strMonth = MONTH_NAME[month];
 		return str + " " + day + " " + strMonth + " " + year;
 	}
 
