@@ -2,51 +2,9 @@ package dates;
 
 import java.util.InputMismatchException;
 
-public class Dates {
-	private int year, month, day;
-	
-	public Dates() {
-		
-	}
-	
-	public Dates(int year, int month, int day) {
-		this.year = year;
-		this.month = month;
-		this.day = day;
-	}
-	
-	public Dates(Dates date) {
-		this.year = date.getYear();
-		this.month = date.getMonth();
-		this.day = date.getDay();
-	}
-	
-	public void setYear(int year) {
-		this.year = year;
-	}
-	
-	public void setMonth(int month) {
-		this.month = month;
-	}
-	
-	public void setDay(int day) {
-		this.day = day;
-	}
-	
-	public int getDay() {
-		return day;
-	}
-	
-	public int getMonth() {
-		return month;
-	}
-	
-	public int getYear() {
-		return year;
-	}
-	
-	
-	public boolean isLeapYear(int year) {
+public class DateUtils {
+
+	public static boolean isLeapYear(int year) {
 		if (year % 4 == 0) {
 			if (year % 100 == 0) {
 				if (year % 400 == 0) {
@@ -58,12 +16,8 @@ public class Dates {
 		}
 		return false;
 	}
-	
-	public boolean isLeapYear(Dates date) {
-		return isLeapYear(date.getYear());
-	}
 
-	public boolean isValidDate(int year, int month, int day) {
+	public static boolean isValidDate(int year, int month, int day) {
 		if (month > 0 && month <= 12 && year >= 0) {
 			if (month == 4 || month == 6 || month == 9 || month == 11) {
 				if (day > 0 && day <= 30)
@@ -82,12 +36,7 @@ public class Dates {
 		return false;
 	}
 
-	public boolean isValidDate(Dates date) {
-		return isValidDate(date.getYear(), date.getMonth(), date.getDay());
-	}
-
-	
-	public int getDayOfWeek(int year, int month, int day) {
+	public static int getDayOfWeek(int year, int month, int day) {
 		if (!isValidDate(year, month, day)) {
 			throw new InputMismatchException();
 		}
@@ -162,13 +111,8 @@ public class Dates {
 		}
 		return 0;
 	}
-	
-	public int getDayOfWeek(Dates date) {
-		return getDayOfWeek(date.getYear(), date.getMonth(), date.getDay());
-	}
-	
 
-	public String toString(int year, int month, int day) {
+	public static String toString(int year, int month, int day) {
 		int dayOfWeek = getDayOfWeek(year, month, day);
 		String str = "";
 		String strMonth = "";
@@ -236,11 +180,7 @@ public class Dates {
 		return str + " " + day + " " + strMonth + " " + year;
 	}
 
-	public String toString(Dates date) {
-		return toString(date.getYear(), date.getMonth(), date.getDay());
-	}
-	
-	public int countDays(int year, int month, int day) {
+	public static int countDays(int year, int month, int day) {
 		if (!isValidDate(year, month, day)) {
 			throw new InputMismatchException();
 		}
@@ -256,11 +196,7 @@ public class Dates {
 		return (int) count;
 	}
 
-	public int countDays(Dates date) {
-		return countDays(date.getYear(), date.getMonth(), date.getDay());
-	}
-	
-	public int daysInMonth(int month) {
+	public static int daysInMonth(int month) {
 		if (month == 4 || month == 6 || month == 9 || month == 11) {
 			return 30;
 		}
@@ -270,11 +206,7 @@ public class Dates {
 		return 31;
 	}
 
-	public int daysInMonth(Dates date) {
-		return daysInMonth(date.getMonth());
-	}
-	
-	public int daysFromBeginOfYear(int month) {
+	public static int daysFromBeginOfYear(int month) {
 		int summ = 0;
 		for (int i = 1; i < month; i++) {
 			summ += daysInMonth(i);
@@ -282,9 +214,4 @@ public class Dates {
 
 		return summ;
 	}
-	
-	public int daysFromBeginOfYear(Dates date) {
-		return daysFromBeginOfYear(date.getMonth());
-	}
-
 }
