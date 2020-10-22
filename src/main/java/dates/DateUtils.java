@@ -36,16 +36,7 @@ public class DateUtils {
 		return false;
 	}
 
-	public static int getDayOfWeek(int year, int month, int day) {
-		if (!isValidDate(year, month, day)) {
-			throw new InputMismatchException();
-		}
-		int displacement = year / 100;
-		do {
-			displacement++;
-		} while (displacement % 4 != 0);
-		displacement = (displacement - 1 - year / 100) * 2;
-		int yearCode = (year % 100 + (year % 100) / 4 + displacement) % 7;
+	public static int getMonthCode(int month) {
 		int monthCode = 0;
 		switch (month) {
 		case 1:
@@ -86,6 +77,20 @@ public class DateUtils {
 			break;
 
 		}
+		return monthCode;
+	}
+	
+	public static int getDayOfWeek(int year, int month, int day) {
+		if (!isValidDate(year, month, day)) {
+			throw new InputMismatchException();
+		}
+		int displacement = year / 100;
+		do {
+			displacement++;
+		} while (displacement % 4 != 0);
+		displacement = (displacement - 1 - year / 100) * 2;
+		int yearCode = (year % 100 + (year % 100) / 4 + displacement) % 7;
+		int monthCode = getMonthCode(month);
 		int dayOfWeek = (day + monthCode + yearCode) % 7;
 		if (isLeapYear(year) && day <= 29 && month <= 2) {
 			dayOfWeek--;
@@ -111,11 +116,9 @@ public class DateUtils {
 		}
 		return 0;
 	}
-
-	public static String toString(int year, int month, int day) {
-		int dayOfWeek = getDayOfWeek(year, month, day);
+	
+	public static String dayOfWeekToString(int dayOfWeek) {
 		String str = "";
-		String strMonth = "";
 		switch (dayOfWeek) {
 		case 0:
 			str = "Monday";
@@ -139,6 +142,11 @@ public class DateUtils {
 			str = "Sunday";
 			break;
 		}
+		return str;
+	}
+	
+	public static String monthToString(int month) {
+		String strMonth = "";
 		switch (month) {
 		case 1:
 			strMonth = "January";
@@ -177,6 +185,13 @@ public class DateUtils {
 			strMonth = "December";
 			break;
 		}
+		return strMonth;
+	}
+
+	public static String toString(int year, int month, int day) {
+		int dayOfWeek = getDayOfWeek(year, month, day);
+		String str = dayOfWeekToString(dayOfWeek);
+		String strMonth = monthToString(month);
 		return str + " " + day + " " + strMonth + " " + year;
 	}
 
